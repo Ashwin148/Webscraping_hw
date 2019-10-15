@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body style="background-color:rgb(188, 205, 243);">
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+    <div id="mars">
+      <div class="row">
+        <div class="col col-lg-12 col-md-12">
+          <p class="h2"><b>Latest Mars News</b></p>
+          <p class="h4"><b>{{scraped_data.news_title}}</b></p>
+          <p class="font-wieght-normal">{{scraped_data.news_p}}</p>
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col col-lg-8 col-md-12">
+          <p class="h2"><b>Featured Mars Image</b></p>
+          <img class="img-thumbnail" src="{{scraped_data.featured_image_url}}" />
+        </div>
+        <div class="col col-lg-4 col-md-12" >
+          <div class='row'style="border-style: ridge">
+            <div class='col'>
+              <p class="h2"><b>Current Weather on Mars</b></p>
+              <p class="font-wieght-normal">{{scraped_data.twitter}}</p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col'>
+              <p class="h2"><b>Mars Facts</b></p>
+              <table class="table">{{scraped_data.facts_df | safe}}</table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-12 col-md-12">
+          <p class="h1 text-center"><b>Mars Hemispheres</b></p>
+          {% for image in scraped_data.hemisphereimage %}
+          <div class="card col-lg-6 col-md-12" >
+            <img src="{{image.img_url}}" class="card-img-top img-thumbnail" alt="{{image.title}}">
+            <div class="card-body">
+              <p class="card-text">{{image.title}}</p>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
